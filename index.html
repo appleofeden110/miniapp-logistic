@@ -1,36 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>MiniApp</title>
-    <script src="https://telegram.org/js/telegram-web-app.js?59"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="validation.js" defer></script>
-    <script src="script.js" defer></script>
-</head>
-<body>
-<div>
-    <div>
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text">
-        <span id="nameError" style="color: red; display: none;"></span>
-    </div>
+<!doctype html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Квітка для тебе</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 40px 20px;
+                background: black;
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: "Courier New", monospace;
+            }
 
-    <div>
-        <label for="surname">Surname</label>
-        <input id="surname" name="surname" type="text">
-        <span id="surnameError" style="color: red; display: none;"></span>
-    </div>
+            .container {
+                max-width: 1200px;
+            }
 
-    <div>
-        <label for="age">Age</label>
-        <input id="age" name="age" type="number">
-        <span id="ageError" style="color: red; display: none;"></span>
-    </div>
+            pre {
+                color: white;
+                font-size: 11px;
+                line-height: 1.2;
+                margin: 0;
+                white-space: pre;
+                overflow-x: auto;
+            }
 
-    <button id="submitBtn">Submit</button>
-    <div id="successMessage" style="color: green; display: none;">Form submitted successfully!</div>
-</div>
+            .poem-line {
+                color: white;
+                font-size: 13px;
+                line-height: 1.6;
+                font-style: italic;
+            }
 
-</body>
+            .message {
+                color: white;
+                font-size: 14px;
+                text-align: center;
+                margin-top: 30px;
+                line-height: 1.8;
+            }
+
+            @media (max-width: 768px) {
+                pre {
+                    font-size: 6px;
+                }
+                .poem-line {
+                    font-size: 11px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <pre>                    "M,        .mM"
+                     IMIm    ,mIM"
+                     ,MI:"IM,mIMm
+          "IMmm,    ,IM::::IM::IM,          ,m"
+             "IMMIMMIMm::IM:::::IM""==mm ,mIM"
+    __      ,mIM::::::MIM:::::::IM::::mIMIM"
+ ,mMIMIMIIMIMM::::::::mM::::::::IMIMIMIMMM"
+IMM:::::::::IMM::::::M::::::::IIM:::::::MM,
+ "IMM::::::::::MM:::M:::::::IM:::::::::::IM,
+    "IMm::::::::IMMM:::::::IM:::::::::::::IM,
+      "Mm:::::::::IM::::::MM::::::::::::::::IM,
+       IM:::::::::IM::::::MM::::::::::::::::::IM,
+        MM::::::::IM:::::::IM::::::::::::::::::IM
+        "IM::::::::IM:::::::IM:::::::::::::::::IM;.
+         "IM::::::::MM::::::::IM::::::::::mmmIMMMMMMMm,.
+           IM::::::::IM:::::::IM::::mIMIMM"""". .. "IMMMM                         <span class="poem-line">На луг лягло благословіння снігу —</span>
+           "IM::::::::IM::::::mIMIMM"". . . . . .,mM"   "M                        <span class="poem-line">Хитливий переплив і перелив сніжин, —</span>
+	    IMm:::::::IM::::IIMM" . . . . . ..,mMM"				  <span class="poem-line">І я мовчу, немов читаю книгу</span>
+            "IMMIMIMMIMM::IMM" . . . ._.,mMMMMM"				  <span class="poem-line">Великих, тихих, лагідних таїн.</span>
+             ,IM". . ."IMIM". . . .,mMMMMMMMM"
+           ,IM . . . .,IMM". . . ,mMMMMMMMMM"                                     <span class="poem-line">В п'янливому, сповільненому смерку</span>
+          IM. . . .,mIIMM,. . ..mMMMMMMMMMM"					  <span class="poem-line">Кружіння серця. О солодка млость!</span>
+         ,M"..,mIMMIMMIMMIMmmmMMMMMMMMMMMM" 				 	  <span class="poem-line">Пурпурні снігурі, як змахи фейєрверку,</span>
+         IM.,IMI"""        ""IIMMMMMMMMMMM 					  <span class="poem-line">Пронизують сріблисту високость.</span>
+        ;IMIM"                  ""IMMMMMMM
+        ""                         "IMMMMM					  <span class="poem-line">Я йду, й мовчу, і тепло марю снами,</span>
+                                     "IMMM					  <span class="poem-line">Я на долонях тиші розтаю, —</span>
+                                      "IMM,					  <span class="poem-line">Кристалик, зведений блаженними руками</span>
+                                       "IMM					  <span class="poem-line">На свій приділ і на журбу свою.</span>
+                                        "MM,
+                                         IMM,              ______   __            <span class="poem-line">Запаморочений, дрімотний, заблукаю,</span>
+                        ______           "IMM__        .mIMMIMMIMMIMMIMM,	  <span class="poem-line">І ввійду в сон, і вже не вийду з сну,</span>
+                   .,mIMMIMMIMM, ,mIMM,   IMM"""     ,mIM". . . . "IM,..M,	  <span class="poem-line">І мовчазливо добреду до краю</span>
+                 ,IMMM' . . . "IMM.\ "M,  IMM      ,IM". . . .  / :;IM \ M,	  <span class="poem-line">Крізь білу, добру, вічну тишину.</span>
+               .mIM' . . .  / .:"IM.\ MM  "MM,    ,M". . .  / .;mIMIMIM,\ M
+              ,IM'. . .  / . .:;,IMIMIMMM  IMM   ,M". .  / .:mIM"'   "IM,:M
+             ,IM'. . . / . .:;,mIM"  `"IMM IMM   IM. .  / .mM"         "IMI
+            ,IM . .  / . .:;,mIM"      "IMMMMM   MM,.  / ,mM            "M'
+            IM'. .  / . .;,mIM"          "IIMMM ,IMIM,.,IM"
+            IM . . / . .,mIM"              IMMMMMMM' """
+            `IM,.  / ;,mIM"                 IIMMM
+             "IMI, /,mIM"                 __IMMM
+               "IMMMM"                   """IMM
+                 ""                         IMM
+                                            IMM__
+                                            IMM"""
+                                            IMM
+                                            IMM
+                                          __IMM
+                                         """IMM
+                                            IMM
+                                            IMM
+                                            IMM__
+                                            IMM"""
+                                            IMM</pre>
+
+            <div class="message">
+                Я надіюсь твій завтрашній день буде набагато краще, Солодка моя.
+                Кохаю тебе &lt;3<br />
+                з Любовʼю - твій Назарко &lt;3
+            </div>
+        </div>
+    </body>
 </html>
